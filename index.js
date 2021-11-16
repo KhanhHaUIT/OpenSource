@@ -13,7 +13,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 const ProductSchema = new Schema(
   {
     name: { type: String, required: true },
@@ -24,13 +23,16 @@ const ProductSchema = new Schema(
   { versionKey: false }
 );
 
-const ImageSchema = new Schema({
-  name: { type: String, required: true },
-  url: {type: String, required: true}
-}, {versionKey: false, timestamps: true})
+const ImageSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    url: { type: String, required: true },
+  },
+  { versionKey: false, timestamps: true }
+);
 
 const Product = mongoose.model("products", ProductSchema);
-const ImageModel = mongoose.model('images', ImageSchema)
+const ImageModel = mongoose.model("images", ImageSchema);
 
 const connectAndRetry = async () => {
   try {
@@ -129,14 +131,13 @@ app.post("/api/products/generate", async (req, res) => {
   }
 });
 
-
-app.post('/api/test', (req, res) => {
+app.post("/api/test", (req, res) => {
   try {
-    const {name} = req.body
-    console.log(req)
+    const { name } = req.body;
+    console.log(req);
     return res.json({
-      name
-    })
+      name,
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -144,6 +145,12 @@ app.post('/api/test', (req, res) => {
       err,
     });
   }
-})
+});
+
+app.get("/api/test/v1", (req, res) => {
+  return res.json({
+    name: "test v1 work",
+  });
+});
 
 app.listen(process.env.PORT || 4000);
