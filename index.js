@@ -153,4 +153,10 @@ app.get("/api/test/v1", (req, res) => {
   });
 });
 
+app.get("/api/test/v2", (req, res) => {
+  return res.json({
+    name: "test v2 work",
+  });
+});
+
 app.listen(process.env.PORT || 4000);
