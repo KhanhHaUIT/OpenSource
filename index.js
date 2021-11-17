@@ -159,4 +159,10 @@ app.get("/api/test/v2", (req, res) => {
   });
 });
 
+app.get("/api/test/v3", (req, res) => {
+  return res.json({
+    name: "test v3 work",
+  });
+});
+
 app.listen(process.env.PORT || 4000);
